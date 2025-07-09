@@ -11,6 +11,24 @@ Open Interface
 - Automatically executes these steps by simulating keyboard and mouse input.
 - Course-corrects by sending the LLM backend updated screenshots of the progress as needed.
 
+### Features
+- Control your computer using natural language via LLMs (GPT-4o, Gemini, etc).
+- Simulates keyboard and mouse input to automate tasks.
+- Takes and analyzes screenshots to course-correct actions.
+- Cross-platform: macOS, Linux, Windows, and Python script mode.
+- Supports multiple LLM backends and custom API endpoints.
+- GUI for easy setup and configuration.
+- Advanced settings for power users.
+
+### Technical Overview
+Open Interface is structured as a modular Python application:
+- **app/app.py**: Main entry point for launching the GUI and core logic.
+- **app/core.py**: Orchestrates the main workflow between the UI, LLM, and system actions.
+- **app/interpreter.py**: Translates LLM instructions into executable actions.
+- **app/llm.py**: Handles communication with LLM backends.
+- **app/models/**: Contains model-specific integrations (OpenAI, Gemini, O1, etc). Easily extensible for new LLMs.
+- **app/utils/**: Utility functions for screen, settings, and local info.
+- **app/ui.py**: Implements the graphical user interface.
 
 <div align="center">
 <h4>Full Autopilot for All Computers Using LLMs</h4>
@@ -31,6 +49,17 @@ Open Interface
 "Solve Today's Wordle"<br>
 ![Solve Today's Wordle](assets/wordle_demo_2x.gif)<br>
 *clipped, 2x*
+
+### Usage Examples
+- **Solve a web puzzle:**
+  1. Open the app and connect your LLM API key.
+  2. Type "Solve Today's Wordle" and watch the app take over your browser.
+- **Automate document creation:**
+  1. Type "Make me a meal plan in Google Docs".
+  2. The app will open Google Docs, create a new document, and fill in a meal plan.
+- **Write code in a web IDE:**
+  1. Type "Write a Web App".
+  2. The app will open a code editor and start writing code for you.
 
 <details>
     <summary><a href="https://github.com/AmberSahdev/Open-Interface/blob/main/MEDIA.md#demos">More Demos</a></summary>
@@ -211,6 +240,20 @@ Open Interface
 (User requests can require between two to a few dozen LLM backend calls depending on the request's complexity.)
 - You can interrupt the app anytime by pressing the Stop button, or by dragging your cursor to any of the screen corners.
 - Open Interface can only see your primary display when using multiple monitors. Therefore, if the cursor/focus is on a secondary screen, it might keep retrying the same actions as it is unable to see its progress.
+
+### Extending & Customizing
+- To add a new LLM backend, create a new file in `app/models/` following the structure of `gpt4o.py` or `gemini.py`.
+- Register your model in `app/models/factory.py`.
+- Use the Advanced Settings in the GUI to select and configure your custom model.
+- For non-OpenAI-compatible APIs, consider using a compatibility layer like [litellm](https://github.com/BerriAI/litellm).
+
+### Testing
+- Tests are located in the `tests/` directory.
+- To run all tests:
+  ```bash
+  python -m unittest discover tests
+  ```
+- Example test file: `tests/simple_test.py`.
 
 <hr>
 
